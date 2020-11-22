@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3"
 services:
   web:
     build: .
@@ -10,20 +10,15 @@ services:
       - psql
       - mongodb
   psql:
-    image: postgres
-    restart: unless-stopped
-    build:
-      context: psql
-      dockerfile: Dockerfile
+    image: postgres:10
     environment:
       - POSTGRES_DB=musicevent
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - psqldata:/var/lib/postgresql/data
       - ./psql/musicevent.sql:/docker-entrypoint-initdb.d/musicevent.sql
     expose:
-      - 5500
+      - 5432
       
   mongodb:
     image: mongo:latest
@@ -33,11 +28,3 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=mongo
       - MONGODB_DATA_DIR=/data/db
       - MONDODB_LOG_DIR=/dev/null
-    volumes:
-      - mongodbdata:/data/db
-      
-volumes:
-  mongodbdata:
-    driver: local
-  psqldata:
-    driver: local

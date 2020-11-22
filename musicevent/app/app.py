@@ -3,11 +3,11 @@ from flask import Flask, render_template, flash, redirect, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 
-DBUSER = 'marco'
-DBPASS = 'foobarbaz'
-DBHOST = 'db'
+DBUSER = 'postgres'
+DBPASS = 'postgres'
+DBHOST = 'psql'
 DBPORT = '5432'
-DBNAME = 'testdb'
+DBNAME = 'musicevent'
 
 
 app = Flask(__name__)
