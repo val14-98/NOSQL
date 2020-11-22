@@ -5,7 +5,7 @@
     <title>MUSICEVENT</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="style.css" rel="stylesheet"/>
+    <link type="text/css" href="{{ url_for('static', filename='style.css') }}" rel="stylesheet"/>
 </head>
 <body>
 <div id="body" class="container-fluid">
@@ -44,23 +44,12 @@
             </div>
         </div>
         <div class="col-md-auto"></div>
-
-
-
-            {% for band in bandsList %}
-            <h3>
-            {{band}}
-            </h3>
-            {% endfor %}
-
-
-
-
     </div>
     <div class="row">
         <div class="col"></div>
         <div class="col-4">
-            <div><h5>THERE IS 1 RESULT</h5></div>
+            <div><h5>THERE IS 1 RESULT</h5>
+            </div>
             <div class="container_artist row">
                 <div class="col-md-auto"><img class="photo" src="https://images-na.ssl-images-amazon.com/images/I/91Vc6ZS1kQL._SL1500_.jpg"/></div>
                 <div class="col-md-auto">
@@ -148,6 +137,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-<script type="text/javascript" src="jsfile.js"></script>
+<script type="text/javascript" href="{{ url_for('static', filename='jsfile.js') }}"></script>
 
 </html>

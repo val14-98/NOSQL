@@ -1,7 +1,7 @@
 import psycopg2
 
 connexion = psycopg2.connect(user="postgres",
-                             port="5432",
+                             port=5432,
                              host="psql",
                              password="postgres",
                              database="musicevent")
