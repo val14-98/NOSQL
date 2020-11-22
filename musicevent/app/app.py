@@ -9,6 +9,23 @@ def accueil():
     bands = manager.getBands()
     return render_template('index.html', bandsList=bands)
 
+# /book?idConcert=17&firstName=testfirst&lastName=testlast&email=testemail
+@app.route('/book', methods=['GET'])
+def book():
+    idConcert = request.args.get('idConcert')
+    firstName = request.args.get('firstName')
+    lastName = request.args.get('lastName')
+    email = request.args.get('email')
+    data = []
+    data.append(idConcert)
+    data.append(firstName)
+    data.append(lastName)
+    data.append(email)
+    return render_template('index.html', bandsList=data)
+
+
+
+
 '''
 @app.route('/', methods=['POST'])
 def my_form_post():

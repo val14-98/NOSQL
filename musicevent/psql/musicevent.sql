@@ -70,7 +70,7 @@ CREATE TABLE Concert
     FOREIGN KEY (idCity) REFERENCES City(id)
 );
 
-INSERT INTO Concert (idBand, idCity, date) VALUES (1, 1, '2021-02-15');
+INSERT INTO Concert (idBand, idCity, date) VALUES (1, 1, '2021-02-15'), (2, 3, '2021-02-05'), (2, 5, '2021-05-10');
 
 
 CREATE TABLE Reservation
