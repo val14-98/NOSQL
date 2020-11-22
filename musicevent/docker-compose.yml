@@ -1,4 +1,4 @@
-version: "3"
+version: "3.3"
 services:
   web:
     build: .
@@ -7,9 +7,37 @@ services:
     volumes:
       - ./app/:/home/app/
     depends_on:
-      - db
-  db:
-    image: postgres:10
-    env_file: .env
+      - psql
+      - mongodb
+  psql:
+    image: postgres
+    restart: unless-stopped
+    build:
+      context: psql
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_DB=musicevent
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - psqldata:/var/lib/postgresql/data
+      - ./psql/musicevent.sql:/docker-entrypoint-initdb.d/musicevent.sql
     expose:
-      - 5432
+      - 5500
+      
+  mongodb:
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_DATABASE=mongo
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=mongo
+      - MONGODB_DATA_DIR=/data/db
+      - MONDODB_LOG_DIR=/dev/null
+    volumes:
+      - mongodbdata:/data/db
+      
+volumes:
+  mongodbdata:
+    driver: local
+  psqldata:
+    driver: local
