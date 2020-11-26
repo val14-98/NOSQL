@@ -10,11 +10,11 @@ body, html {
     overflow-x: hidden;
 }
 #top{
-    padding-top: 20px;
    /* background: red;*/
 }
 #title{
     letter-spacing: 4px;
+    padding-top: 20px;
 }
 #research_input{
     margin-top: 10px;
@@ -27,8 +27,22 @@ body, html {
     padding: 5px;
     margin-bottom: 20px;
 }
+#container_reservations{
+    color: black;
+    background: white;
+    min-height: 50px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
 .photo{
-    width: 150px;
+    width: 10vw;
+    margin-left: -15px;
+    height:auto;
+    border-radius: 5px;
+}
+.photo_small{
+    width: 5vw;
     margin-left: -15px;
     height:auto;
     border-radius: 5px;
@@ -44,8 +58,9 @@ body, html {
     transform: translateY(120%);
 }
 #footer {
+    margin-top: 50px;
     text-align: center;
     width: 100%;
-    position: absolute;
     bottom: 20px;
 }
+
