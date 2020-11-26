@@ -80,6 +80,7 @@ CREATE TABLE Reservation
     firstName varchar (50) NOT NULL,
     lastName varchar (50) NOT NULL,
     email varchar (255),
+    date timestamp NOT NULL DEFAULT NOW(),
     FOREIGN KEY (idConcert) REFERENCES Concert(id)
 );
 

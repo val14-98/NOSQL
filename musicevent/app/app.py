@@ -7,8 +7,10 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def accueil():
-    bands = manager.getBands()
-    return render_template('index.html', bandsList=bands)
+    # TODO : proposer concerts les plus proches
+    #bands = manager.getBands()
+    #,  bandsList=bands
+    return render_template('index.html')
 
 
 # /book?idConcert=17&firstName=testfirst&lastName=testlast&email=testemail
