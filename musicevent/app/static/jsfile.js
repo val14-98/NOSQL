@@ -1,11 +1,9 @@
 let research;
 $(document).ready(function() {
-	if($('input[type=radio][name=inlineRadioOptions]').is(":checked"){
-		$('#button-addon2').prop('disabled', false);
-	});
     $('input[type=radio][name=inlineRadioOptions]').change(function () {
         $('#button-addon2').prop('disabled', false);
         if ($('#inlineRadio1').is(':checked')) {
+            //alert("BY ARTIST/GROUP");
             research = 1;
         } else if ($('#inlineRadio2').is(':checked')) {
             //alert("BY CITY");
@@ -49,5 +47,5 @@ $(document).ready(function() {
             $('#bookSubmit').prop('disabled', true);
         }
     });
-    
+
 });
