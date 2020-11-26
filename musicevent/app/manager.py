@@ -16,3 +16,46 @@ def getBands():
     return s
 
 
+def getConcertsByCity(city):
+    query = "SELECT Band.name, Band.mediaUrl, MusicType.name, date, City.name, Country.name " \
+            "FROM Concert " \
+            "inner join City on City.id = idCity " \
+            "inner join Country on Country.id = idCountry " \
+            "inner join Band on Band.id = idBand " \
+            "inner join MusicType on MusicType.id = idMusicType "\
+            "where City.name like '%"+city+"%'"
+    s = []
+    cursor.execute(query)
+    for res in cursor.fetchall():
+        s.append([res[0], res[1], res[2], res[3], res[4], res[5]])
+    return s
+
+
+def getConcertsByDate(date):
+    query = "SELECT Band.name, Band.mediaUrl, MusicType.name, date, City.name, Country.name" \
+            "FROM Concert" \
+            "inner join City onCity.id = idCity" \
+            "inner join Country on  Country.id = idCountry" \
+            "inner join Band on Band.id = idBand" \
+            "inner join MusicType on MusicType.id = idMusicType" \
+            "where date like '%"+date+"%'"
+    s = []
+    cursor.execute(query)
+    for res in cursor.fetchall():
+        s.append([res[0], res[1], res[2], res[3], res[4], res[5]])
+    return s
+
+
+def getConcertsByArtist(artistName):
+    query = "SELECT Band.name, Band.mediaUrl, MusicType.name, date, City.name, Country.name" \
+            "FROM Concert" \
+            "inner join City onCity.id = idCity" \
+            "inner join Country on  Country.id = idCountry" \
+            "inner join Band on Band.id = idBand" \
+            "inner join MusicType on MusicType.id = idMusicType" \
+            "where Band.name like '%"+artistName+"%'"
+    s = []
+    cursor.execute(query)
+    for res in cursor.fetchall():
+        s.append([res[0], res[1], res[2], res[3], res[4], res[5]])
+    return s

@@ -1,5 +1,6 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template, request
 import manager
+
 # import mongodb
 app = Flask(__name__)
 
@@ -9,6 +10,7 @@ def accueil():
     bands = manager.getBands()
     return render_template('index.html', bandsList=bands)
 
+
 # /book?idConcert=17&firstName=testfirst&lastName=testlast&email=testemail
 @app.route('/book', methods=['GET'])
 def book():
@@ -16,6 +18,7 @@ def book():
     firstName = request.args.get('firstName')
     lastName = request.args.get('lastName')
     email = request.args.get('email')
+    # TODO : insert en bdd
     data = []
     data.append(idConcert)
     data.append(firstName)
@@ -24,7 +27,19 @@ def book():
     return render_template('index.html', bandsList=data)
 
 
+# /search?method=city&value=Marseille
+@app.route('/search', methods=['GET'])
+def search():
+    searchMethod = request.args.get('method')
+    value = request.args.get('value')
+    if searchMethod == "city":
+        data = manager.getConcertsByCity(value)
+    elif searchMethod == "date":
+        data = manager.getConcertsByDate(value)
+    else:
+        data = manager.getConcertsByArtist(value)
 
+    return render_template('index.html', bandsList=data)
 
 '''
 @app.route('/', methods=['POST'])
@@ -97,10 +112,4 @@ def my_form_post():
 '''
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0",port=5000)
-
-
-    
-
-        
-       
+    app.run(host="0.0.0.0", port=5000)
