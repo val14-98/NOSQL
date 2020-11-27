@@ -5,12 +5,15 @@ import manager
 app = Flask(__name__)
 
 
+
 @app.route('/', methods=['GET'])
 def accueil():
-    # TODO : proposer concerts les plus proches
-    #bands = manager.getBands()
-    #,  bandsList=bands
-    return render_template('index.html')
+    query_1_state, concerts = manager.getMainPageConcerts()
+    query_2_state, lastResa = manager.getLastReservedConcerts()
+    return render_template('index.html',
+                            queryState = query_1_state and query_2_state,
+                            concertsList=concerts,
+                            lastBookedConcerts=lastResa)
 
 
 # /book?idConcert=17&firstName=testfirst&lastName=testlast&email=testemail
@@ -20,9 +23,15 @@ def book():
     firstName = request.args.get('firstName')
     lastName = request.args.get('lastName')
     email = request.args.get('email')
-    manager.book(idConcert, firstName, lastName, email)
-     # TODO : proposer concerts les plus proches
-    return render_template('index.html')
+
+    state                   = manager.book(idConcert, firstName, lastName, email)
+    query_1_state, concerts = manager.getMainPageConcerts()
+    query_2_state, lastResa = manager.getLastReservedConcerts()
+
+    return render_template('index.html',
+                            queryState = state and query_1_state and query_2_state,
+                            concertsList=concerts,
+                            lastBookedConcerts=lastResa)
 
 
 # /search?method=city&value=Marseille
@@ -31,17 +40,26 @@ def search():
     searchMethod = request.args.get('method')
     value = request.args.get('value')
     if searchMethod == "city":
-        data = manager.getConcertsByCity(value)
+        state, concerts = manager.getConcertsByCity(value)
     elif searchMethod == "date":
-        data = manager.getConcertsByDate(value)
+        state, concerts = manager.getConcertsByDate(value)
     else:
-        data = manager.getConcertsByArtist(value)
+        state, concerts = manager.getConcertsByArtist(value)
 
-    return render_template('index.html', bandsList=data)
-
+    query_1_state, lastResa = manager.getLastReservedConcerts()
+    return render_template('index.html',
+                            queryState = state and query_1_state,
+                            concertsList=concerts,
+                            lastBookedConcerts=lastResa)
 
 
 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
+
+# /book?idConcert=3&firstName=testfirst&lastName=testlast&email=testemail
+# /search?method=city&value=toulou
+# /search?method=date&value=2021-02-15
+# /search?method=artist&value=bat
