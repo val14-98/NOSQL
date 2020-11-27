@@ -82,7 +82,7 @@ def book(idConcert, prenom, nom, email):
 
 
 def getLastReservedConcerts():
-    subsubquery = "SELECT idConcert, max(date) AS maxReservationDate FROM Reservation GROUP BY idConcert ORDER BY maxReservationDate DESC LIMIT 3"
+    subsubquery = "SELECT idConcert, max(date) AS maxReservationDate FROM Reservation GROUP BY idConcert ORDER BY maxReservationDate DESC LIMIT 10"
     subquery = "AND Concert.id IN(SELECT idConcert FROM ("+subsubquery+") AS concertSelection"
     query = selectionQueryBase + subquery +")"
     try :
