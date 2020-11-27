@@ -20,8 +20,39 @@ $(document).ready(function () {
 
     //Redirection formulaire research
     $("#button-research").click(function () {
+        $('#space_alert').html('<div class="alert alert-danger collapse alerts" role="alert">\n' +
+            '                Error, please enter data in the format YYYY/MM/DD\n' +
+            '                <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+            '                    <span aria-hidden="true">&times;</span>\n' +
+            '                </button>\n' +
+            '            </div>\n' +
+            '            <div class="alert alert-danger collapse alerts" role="alert">\n' +
+            '                Error, please enter a date that has not passed\n' +
+            '                <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+            '                    <span aria-hidden="true">&times;</span>\n' +
+            '                </button>\n' +
+            '            </div>');
         let research = $("#research_input_fill").val();
-        document.location.href = "search?method=" + method + "&value=" + $("#research_input_fill").val();
+        if(method === "date"){
+           let date =  Date.parse(research);
+           if (isNaN(date) === false) {
+               let current_date = new Date();
+                if(date >= current_date.getTime('YYYY-MM-DD')){
+                    document.location.href = "search?method=" + method + "&value=" + $("#research_input_fill").val();
+                }
+                else {
+                    $(".alert:nth-child(2)").show('fade');
+                }
+        }
+           else {
+
+               $(".alert:nth-child(1)").show('fade');
+           }
+        }
+        else {
+            document.location.href = "search?method=" + method + "&value=" + $("#research_input_fill").val();
+        }
+
     });
 
     //Redirection formulaire newletters

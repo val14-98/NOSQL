@@ -63,4 +63,7 @@ body, html {
     width: 100%;
     bottom: 20px;
 }
+.alerts{
+    position: absolute;
+}
 
