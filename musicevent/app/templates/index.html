@@ -9,9 +9,26 @@
 </head>
 <body>
 
-{{queryState}}
-{{concertsList}}
-{{lastBookedConcerts}}	
+
+<!--
+Si une erreur est survenue lors de l'exécution d'une requête en BDD
+affiche un message d'erreur et redirige l'utilisateur vers la page d'accueil
+-->
+
+<body onload="redirectIfDatabaseQueryFailed()">
+
+<!-- TODO : Déplacer la fonction dans le fichiers JS -->
+<script>
+function redirectIfDatabaseQueryFailed() {
+	// Si une erreur est survenue lors de l'exécution d'une requête en BDD, affiche un message d'erreur
+	// et redirige l'utilisateur vers la page d'accueil
+	{% if queryState != true %}
+		alert("Un problème technique est survenu lors de notre recherche...\nVous allez être redirigé vers la page d'accueil");
+		window.location.href = "http://0.0.0.0:5000";
+	{% endif %}
+}
+</script>
+
 
 <div id="body" class="container-fluid">
     <div id="top" class="row justify-content-md-center">
@@ -62,31 +79,49 @@
         <div class="col"></div>
         <div class="col-5">
             <!----------------------AFFICHAGE DYNAMIQUE DES RESULTATS-------------------------->
-            <div><h5>THERE IS 1 RESULT</h5></div>
-            <div class="container_artist row d-flex flex-row">
-                <div class="col-md-auto"><img class="photo"
-                                              src="https://images-na.ssl-images-amazon.com/images/I/91Vc6ZS1kQL._SL1500_.jpg"/>
-                </div>
-                <div class="col">
-                    <h7>Artist</h7>
-                    <h5 class="artist_pres">POWERWOLF</h5>
-                    <hr>
-                    <h7>Type of music</h7>
-                    <h5 class="style_pres">POWER METAL</h5>
-                </div>
-                <div class="col">
-                    <h7>Concert Date</h7>
-                    <h5 class="date_pres">15/02/2021</h5>
-                    <hr>
-                    <h7>City</h7>
-                    <h5 class="city_pres">FRANCE, PARIS</h5>
-                </div>
-                <div class="col">
-                    <button type="button" class="btn btn-primary button_submit" onclick="book(7)" data-toggle="modal"
-                            data-target="#concert_booking">BOOK
-                    </button>
-                </div>
-            </div>
+          
+
+			{% if concertsList|length >= 1 %}
+
+				<div><h5>
+				<!-- Affichage du nombre de concerts à afficher -->
+	            WE FOUND {{concertsList|length}} MATCHING CONCERTS :
+	        	</h5></div>
+
+
+	    	    {% for concert in concertsList %}
+	            <div class="container_artist row d-flex flex-row">
+	                <div class="col-md-auto">
+	                	<img class="photo" src="{{concert[2]}}"/>
+	                </div>
+	                <div class="col">
+	                    <h7>Artist</h7>
+	                    <h5 class="artist_pres">{{concert[1]}}</h5>
+	                    <hr>
+	                    <h7>Music type</h7>
+	                    <h5 class="style_pres">{{concert[3]}}</h5>
+	                </div>
+	                <div class="col">
+	                    <h7>Concert Date</h7>
+	                    <h5 class="date_pres">{{concert[4]}}</h5>
+	                    <hr>
+	                    <h7>City</h7>
+	                    <h5 class="city_pres">{{concert[6]}}, {{concert[5]}}</h5>
+	                </div>
+	                <div class="col">
+	                    <button type="button" class="btn btn-primary button_submit" onclick="book({{concert[0]}})" data-toggle="modal"
+	                            data-target="#concert_booking">BOOK
+	                    </button>
+	                </div>
+	            </div>
+			    {% endfor %}
+
+           	{% else %}
+           	            <div><h5>Sorry, we didn't found any concert matching with your request</h5></div>
+            {% endif %}
+
+
+
             <div id="newletter">
                 <h4>SUBSCRIBE TO OUR NEWLETTER !</h4>
                 <form>
@@ -110,43 +145,33 @@
             <div class="col">
                 <div><h5>LAST RESERVATIONS</h5></div>
                 <div id="container_reservations">
+
+
+				{% for concert in lastBookedConcerts %}
+				
                     <div class=" d-flex flex-row" style="white-space: nowrap">
                         <div class="col">
                             <img class="photo_small"
-                                 src="https://images-na.ssl-images-amazon.com/images/I/91Vc6ZS1kQL._SL1500_.jpg"/>
+                                 src="{{concert[2]}}"/>
                         </div>
                         <div class="col">
                             <h8>Artist</h8>
-                            <h6>POWERWOLF</h6>
+                            <h6>{{concert[1]}}</h6>
                         </div>
                         <div class="col">
                             <h8>Date</h8>
-                            <h6>15/02/2021</h6>
+                            <h6>{{concert[4]}}</h6>
                         </div>
                         <div class="col">
                             <h8>City</h8>
-                            <h6>PARIS</h6>
+                            <h6>{{concert[5]}}</h6>
                         </div>
                     </div>
+
                     <hr>
-                    <div class=" d-flex flex-row" style="white-space: nowrap">
-                        <div class="col">
-                            <img class="photo_small"
-                                 src="https://images-na.ssl-images-amazon.com/images/I/91Vc6ZS1kQL._SL1500_.jpg"/>
-                        </div>
-                        <div class="col">
-                            <h8>Artist</h8>
-                            <h6>POWERWOLF</h6>
-                        </div>
-                        <div class="col">
-                            <h8>Date</h8>
-                            <h6>15/02/2021</h6>
-                        </div>
-                        <div class="col">
-                            <h8>City</h8>
-                            <h6>PARIS</h6>
-                        </div>
-                    </div>
+				{% endfor %}
+
+
                 </div>
             </div>
             <div class="col-2"></div>

@@ -30,8 +30,8 @@ CREATE TABLE Band
     FOREIGN KEY (idMusicType) REFERENCES MusicType(id)
 );
 
-INSERT INTO Band (idMusicType, name, mediaUrl) VALUES (1,'Powerwolf','https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
-INSERT INTO Band (idMusicType, name, mediaUrl) VALUES (1,'Sabaton','https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515371_10629.jpg');
+INSERT INTO Band (idMusicType, name, mediaUrl) VALUES (1,'POWERWOLF','https://images-na.ssl-images-amazon.com/images/I/91Vc6ZS1kQL._SL1500_.jpg');
+INSERT INTO Band (idMusicType, name, mediaUrl) VALUES (1,'SABATON','https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515371_10629.jpg');
 INSERT INTO Band (idMusicType, name, mediaUrl) VALUES (1,'System Of A Down','https://www.lagrosseradio.com/webzine/images/15743.jpg');
 INSERT INTO Band (idMusicType, name, mediaUrl) VALUES (2,'ACDC','https://i.ytimg.com/vi/9FzC5881E4s/maxresdefault.jpg');
 INSERT INTO Band (idMusicType, name, mediaUrl) VALUES (1,'As I Lay Dying','https://www.rockurlife.net/wp-content/uploads/2019/09/ShapedByFIre.jpg');
@@ -42,7 +42,7 @@ CREATE TABLE Country
     name varchar (50) NOT NULL
 );
 
-INSERT INTO Country (name) VALUES ('france'),('allemagne'),('belgique'),('suisse'),('italie'),('espagne'),('angleterre');
+INSERT INTO Country (name) VALUES ('FRANCE'),('GERMANY'),('BELGIUM'),('SWITZERLAND'),('ITALY'),('SPAIN'),('ENGLAND');
 
 CREATE TABLE City
 (
@@ -52,13 +52,15 @@ CREATE TABLE City
     FOREIGN KEY (idCountry) REFERENCES Country(id)
 );
 
-INSERT INTO City (idCountry, name) VALUES (1, 'paris'), (1, 'marseille'), (1, 'toulouse'), (1, 'bordeaux');
-INSERT INTO City (idCountry, name) VALUES (2, 'berlin'), (2, 'munich'), (2, 'hambourg'), (2, 'cologne');
-INSERT INTO City (idCountry, name) VALUES (3, 'liège'), (3, 'bruxelles'), (3, 'bruges'), (3, 'anvers');
-INSERT INTO City (idCountry, name) VALUES (4, 'zurich'), (4, 'genève'), (4, 'lausanne'), (4, 'montreux');
-INSERT INTO City (idCountry, name) VALUES (5, 'rome'), (5, 'venise'), (5, 'florence'), (5, 'milan');
-INSERT INTO City (idCountry, name) VALUES (6, 'madrid'), (6, 'barcelone'), (6, 'valence'), (6, 'séville');
-INSERT INTO City (idCountry, name) VALUES (7, 'london'), (7, 'manchester'), (7, 'liverpool'), (7, 'edimbourg');
+INSERT INTO City (idCountry, name) VALUES
+    (1, 'Paris'), (1, 'Marseille'), (1, 'Toulouse'), (1, 'Bordeaux'),
+    (2, 'Berlin'), (2, 'Munich'), (2, 'Hambourg'), (2, 'Cologne'),
+    (3, 'Liège'), (3, 'Brussels'), (3, 'Bruges'), (3, 'Anvers'),
+    (4, 'Zurich'), (4, 'Geneva'), (4, 'Lausanne'), (4, 'Montreux'),
+    (5, 'Roma'), (5, 'Venice'), (5, 'Florence'), (5, 'Milan'),
+    (6, 'Madrid'), (6, 'Barcelona'), (6, 'Valence'), (6, 'Sevilla'),
+    (7, 'London'), (7, 'Manchester'), (7, 'Liverpool'), (7, 'Edimbourg')
+;
 
 CREATE TABLE Concert
 (
@@ -107,32 +109,3 @@ INSERT INTO Reservation (idConcert, firstName, lastName, email, date) VALUES
     (5, 'Julia', 'Manne', 'julia.manne@gmail.com', '2021-07-01'),
     (5, 'Laurent', 'Lopes', 'laurentlopes@gmail.com', '2021-07-02')
 ;
-
-
-
--- Recherche par ville
-/*SELECT Band.name, Band.mediaUrl, MusicType.name, date, City.name, Country.name FROM Concert
-inner join City on City.id = idCity
-inner join Country on Country.id = idCountry
-inner join Band on Band.id = idBand
-inner join MusicType on MusicType.id = idMusicType
-where City.name like '%_____%';*/
-
--- Recherche par artiste
-/*SELECT Band.name, Band.mediaUrl, MusicType.name, date, City.name, Country.name FROM Concert
-inner join City on City.id = idCity
-inner join Country on Country.id = idCountry
-inner join Band on Band.id = idBand
-inner join MusicType on MusicType.id = idMusicType
-where Band.name like '%_____%';*/
-
--- Recherche par date
-/*SELECT Band.name, Band.mediaUrl, MusicType.name, date, City.name, Country.name FROM Concert
-inner join City on City.id = idCity
-inner join Country on Country.id = idCountry
-inner join Band on Band.id = idBand
-inner join MusicType on MusicType.id = idMusicType
-where date like '%_____%';*/
-
--- Effectuer réservation
-/*INSERT INTO Reservation (idConcert, firstName, lastName, email) VALUES (?, ?, ?, ?);*/

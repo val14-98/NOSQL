@@ -1,11 +1,8 @@
 import psycopg2
 
 # TODO : si saisie contient des quotes (simple ou double) : problème
-# TODO : filtrer sur concerts à venir
 # TODO : après appel d'une fonction, réinitialiser l'url dans le navigateur
-# TODO : to lower
 # TODO : cursor.close()
-# TODO : 2 eme var à retourner (bool) = false si requete failed
 
 
 connexion = psycopg2.connect(user="postgres",
@@ -23,6 +20,8 @@ selectionQueryBase = "SELECT Concert.id, Band.name, Band.mediaUrl, MusicType.nam
             "inner join MusicType on MusicType.id = idMusicType " \
             "where date >= NOW() "
 
+selectionQueryTermination = " ORDER BY concertDate DESC"
+
 
 def parseSelectionResults():
     concertsData = []
@@ -33,7 +32,7 @@ def parseSelectionResults():
 
 
 def getConcertsByCity(city):
-    query = selectionQueryBase + "AND City.name like '%"+city+"%'"
+    query = selectionQueryBase + "AND LOWER(City.name) like '%"+city.lower()+"%'" + selectionQueryTermination
     try :
         cursor.execute(query)
         return True, parseSelectionResults()
@@ -42,7 +41,7 @@ def getConcertsByCity(city):
 
 
 def getConcertsByDate(date):
-    query = selectionQueryBase + "AND date = '"+date+"'"
+    query = selectionQueryBase + "AND date = '"+date+"'" + selectionQueryTermination
     try :
         cursor.execute(query)
         return True, parseSelectionResults()
@@ -51,7 +50,7 @@ def getConcertsByDate(date):
     
 
 def getConcertsByArtist(artistName):
-    query = selectionQueryBase + "AND Band.name like '%"+artistName+"%'"
+    query = selectionQueryBase + "AND LOWER(Band.name) like '%"+artistName.lower()+"%'" + selectionQueryTermination
     try :
         cursor.execute(query)
         return True, parseSelectionResults()
@@ -77,8 +76,6 @@ def book(idConcert, prenom, nom, email):
         return True
     except :
         return False
-
-
 
 
 def getLastReservedConcerts():
