@@ -19,7 +19,7 @@ CREATE TABLE MusicType
     name varchar (100) NOT NULL
 );
 
-INSERT INTO MusicType (name) VALUES ('Metal'),('Rock'), ('Classic'), ('Jazz'), ('Electro');
+INSERT INTO MusicType (name) VALUES ('Metal'), ('Rock'), ('Classic'), ('Jazz'), ('Electro');
 
 CREATE TABLE Band
 (
@@ -42,7 +42,7 @@ CREATE TABLE Country
     name varchar (50) NOT NULL
 );
 
-INSERT INTO Country (name) VALUES ('France'),('Deutschland'),('Belgium'),('Switzerland'),('Italy'),('Spain'),('United Kingdom');
+INSERT INTO Country (name) VALUES ('france'),('allemagne'),('belgique'),('suisse'),('italie'),('espagne'),('angleterre');
 
 CREATE TABLE City
 (
@@ -52,13 +52,13 @@ CREATE TABLE City
     FOREIGN KEY (idCountry) REFERENCES Country(id)
 );
 
-INSERT INTO City (idCountry, name) VALUES (1, 'Paris'), (1, 'Marseille'), (1, 'Toulouse'), (1, 'Bordeaux');
-INSERT INTO City (idCountry, name) VALUES (2, 'Berlin'), (2, 'Munich'), (2, 'Hambourg'), (2, 'Cologne');
-INSERT INTO City (idCountry, name) VALUES (3, 'Liège'), (3, 'Bruxelles'), (3, 'Bruges'), (3, 'Anvers');
-INSERT INTO City (idCountry, name) VALUES (4, 'Zurich'), (4, 'Genève'), (4, 'Lausanne'), (4, 'Montreux');
-INSERT INTO City (idCountry, name) VALUES (5, 'Rome'), (5, 'Venise'), (5, 'Florence'), (5, 'Milan');
-INSERT INTO City (idCountry, name) VALUES (6, 'Madrid'), (6, 'Barcelone'), (6, 'Valence'), (6, 'Séville');
-INSERT INTO City (idCountry, name) VALUES (7, 'London'), (7, 'Manchester'), (7, 'Liverpool'), (7, 'Edimbourg');
+INSERT INTO City (idCountry, name) VALUES (1, 'paris'), (1, 'marseille'), (1, 'toulouse'), (1, 'bordeaux');
+INSERT INTO City (idCountry, name) VALUES (2, 'berlin'), (2, 'munich'), (2, 'hambourg'), (2, 'cologne');
+INSERT INTO City (idCountry, name) VALUES (3, 'liège'), (3, 'bruxelles'), (3, 'bruges'), (3, 'anvers');
+INSERT INTO City (idCountry, name) VALUES (4, 'zurich'), (4, 'genève'), (4, 'lausanne'), (4, 'montreux');
+INSERT INTO City (idCountry, name) VALUES (5, 'rome'), (5, 'venise'), (5, 'florence'), (5, 'milan');
+INSERT INTO City (idCountry, name) VALUES (6, 'madrid'), (6, 'barcelone'), (6, 'valence'), (6, 'séville');
+INSERT INTO City (idCountry, name) VALUES (7, 'london'), (7, 'manchester'), (7, 'liverpool'), (7, 'edimbourg');
 
 CREATE TABLE Concert
 (
@@ -70,7 +70,13 @@ CREATE TABLE Concert
     FOREIGN KEY (idCity) REFERENCES City(id)
 );
 
-INSERT INTO Concert (idBand, idCity, date) VALUES (1, 1, '2021-02-15'), (2, 3, '2021-02-05'), (2, 5, '2021-05-10');
+INSERT INTO Concert (idBand, idCity, date) VALUES
+    (1, 1, '2021-02-15'),
+    (2, 3, '2021-02-05'),
+    (2, 5, '2021-05-10'),
+    (3, 1, '2019-03-03'),
+    (3, 18, '2021-07-17')
+;
 
 
 CREATE TABLE Reservation
@@ -84,7 +90,23 @@ CREATE TABLE Reservation
     FOREIGN KEY (idConcert) REFERENCES Concert(id)
 );
 
-INSERT INTO Reservation (idConcert, firstName, lastName, email) VALUES (1, 'Virgile', 'Jallon', 'v.j@gmail.com');
+INSERT INTO Reservation (idConcert, firstName, lastName, email, date) VALUES
+    (1, 'Virgile', 'Jallon', 'v.j@gmail.com', '2021-01-01'),
+    (1, 'Laurent', 'Lopes', 'laurentlopes@gmail.com', '2021-01-02'),
+    (1, 'Benjamin', 'Bonnefoy', 'benji.b@gmail.com', '2021-01-03'),
+
+    (2, 'Julien', 'Loudes', 'jloudes@gmail.com', '2021-02-01'),
+    (2, 'Dan', 'Bonix', 'dbonix@gmail.com', '2021-02-02'),
+
+    (3, 'Virgile', 'Jallon', 'v.j@gmail.com', '2021-05-01'),
+    (3, 'Laurent', 'Lopes', 'laurentlopes@gmail.com', '2021-05-01'),
+
+    (4, 'Virgile', 'Jallon', 'v.j@gmail.com', '2019-03-01'),
+    (4, 'Laura', 'Murzo', 'lauram@gmail.com', '2019-03-02'),
+
+    (5, 'Julia', 'Manne', 'julia.manne@gmail.com', '2021-07-01'),
+    (5, 'Laurent', 'Lopes', 'laurentlopes@gmail.com', '2021-07-02')
+;
 
 
 

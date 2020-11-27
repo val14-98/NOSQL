@@ -2,6 +2,9 @@ import psycopg2
 
 # TODO : si saisie contient des quotes (simple ou double) : problème
 # TODO : filtrer sur concerts à venir
+# TODO : après appel d'une fonction, réinitialiser l'url dans le navigateur
+
+
 connexion = psycopg2.connect(user="postgres",
                              port=5432,
                              host="psql",
@@ -42,12 +45,26 @@ def getConcertsByArtist(artistName):
 
 #def getLastReservedConcerts():
 '''
-SELECT DISTINCT Band.name, Band.mediaUrl, TO_CHAR(Concert.date :: DATE, 'yyyy-mm-dd'), City.name
-from Concert
-inner join Reservation on Concert.id = Reservation.idConcert
-inner join City on City.id = idCity
-inner join Band on Band.id = idBand
-ORDER BY Reservation.date ASC LIMIT 5; 
+SELECT DISTINCT Band.name, Band.mediaUrl, TO_CHAR(Concert.date :: DATE, 'yyyy-mm-dd'), City.name from Concert inner join Reservation on Concert.id = Reservation.idConcert inner join City on City.id = idCity inner join Band on Band.id = idBand ORDER BY Reservation.date DESC LIMIT 5; 
 '''
+#select distinct concert.id from concert inner join Reservation on Concert.id = Reservation.idConcert order by Reservation.date;
+#select distinct idconcert from (
+#select idconcert, date from reservation order by date DESC
+#) as data limit 4;
 
-# def book(idConcert, prenom, nom, email)
+
+
+
+def book(idConcert, prenom, nom, email):
+    # TODO : try catch
+    #query = "INSERT INTO Reservation (idConcert, firstName, lastName, email) VALUES (:idConcert, :firstName, :lastName, :email)"
+    #cursor.execute(query, {"idConcert":idConcert, "firstName":prenom, "lastName":nom, "email":email})
+    query2 = "INSERT INTO Reservation (idConcert, firstName, lastName, email) VALUES ("+idConcert+",\'"+prenom+"\',\'"+nom+"\',\'"+email+"\')"
+    cursor.execute(query2)
+    # todo : return true ou liste des concerts page accueil
+    return getConcertsByCity("toulouse")
+
+# INSERT INTO Reservation (idConcert, firstName, lastName, email) VALUES (?, ?, ?, ?);
+
+def subscribeToNewsletter(email, receiveAds):
+    
