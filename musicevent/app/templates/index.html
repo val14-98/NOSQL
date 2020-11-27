@@ -28,7 +28,7 @@
             <div id="research">
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                           value="option1">
+                           value="option1" checked>
                     <label class="form-check-label" for="inlineRadio1">BY ARTIST/GROUP</label>
                 </div>
                 <div class="form-check form-check-inline">
@@ -42,10 +42,10 @@
                     <label class="form-check-label" for="inlineRadio3">BY DATE</label>
                 </div>
                 <div id="research_input" class="input-group mb-5 col-md-6">
-                    <input type="text" class="form-control" placeholder=" " aria-label=""
-                           aria-describedby="button-addon2">
+                    <input id="research_input_fill" type="text" class="form-control" placeholder=" " aria-label=""
+                           aria-describedby="button-research" onkeyup='keyup()'>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" disabled>SEARCH
+                        <button class="btn btn-outline-secondary" type="button" id="button-research" disabled>SEARCH
                         </button>
                     </div>
                 </div>
@@ -56,6 +56,7 @@
     <div class="row">
         <div class="col"></div>
         <div class="col-5">
+            <!----------------------AFFICHAGE DYNAMIQUE DES RESULTATS-------------------------->
             <div><h5>THERE IS 1 RESULT</h5></div>
             <div class="container_artist row d-flex flex-row">
                 <div class="col-md-auto"><img class="photo"
@@ -63,20 +64,20 @@
                 </div>
                 <div class="col">
                     <h7>Artist</h7>
-                    <h5>POWERWOLF</h5>
+                    <h5 class="artist_pres">POWERWOLF</h5>
                     <hr>
                     <h7>Type of music</h7>
-                    <h5>POWER METAL</h5>
+                    <h5 class="style_pres">POWER METAL</h5>
                 </div>
                 <div class="col">
                     <h7>Concert Date</h7>
-                    <h5>15/02/2021</h5>
+                    <h5 class="date_pres">15/02/2021</h5>
                     <hr>
                     <h7>City</h7>
-                    <h5>FRANCE, PARIS</h5>
+                    <h5 class="city_pres">FRANCE, PARIS</h5>
                 </div>
                 <div class="col">
-                    <button type="button" class="btn btn-primary button_submit" data-toggle="modal"
+                    <button type="button" class="btn btn-primary button_submit" onclick="book(7)" data-toggle="modal"
                             data-target="#concert_booking">BOOK
                     </button>
                 </div>
@@ -86,17 +87,20 @@
                 <form>
                     <div class="form-group">
                         <label for="newsEmail">Email address</label>
-                        <input type="email" class="form-control" id="newsEmail" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" id="newsEmail"  onkeyup="newkeyup()" aria-describedby="emailHelp">
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="offersCheck" checked>
+                        <input type="checkbox" class="form-check-input" id="offersCheck" onclick="newkeyup" checked>
                         <label class="form-check-label" for="offersCheck">Receive offers from our partners</label>
                     </div>
+                    <br>
                     <button type="button" class="btn btn-primary" id="newsSubmit" disabled>Submit</button>
                 </form>
             </div>
         </div>
-        <div class=" col">
+        <!----------------------FIN RESULTATS----------------------------------->
+        <!----------------------HISTORIQUE RESERVATION-------------------------->
+        <div class="col">
             <div class="col"></div>
             <div class="col">
                 <div><h5>LAST RESERVATIONS</h5></div>
@@ -143,8 +147,9 @@
             <div class="col-2"></div>
         </div>
     </div>
-    <!----------------------POPUP--------------------->
-    <div class="modal fade" style="color:black" id="concert_booking" tabindex="-1" role="dialog"
+    <!----------------------FIN HISTORIQUE RESERVATIONS--------------------->
+    <!----------------------POPUP------------------------------------------->
+    <div class="modal fade" id="concert_booking" style="color:black" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -158,18 +163,17 @@
                     <form>
                         <div class="row">
                             <div class="col">
-                                <input type="text" class="form-control" name="firstName" placeholder="First name">
+                                <input type="text" class="form-control firstname_post" name="firstName" placeholder="First name" onkeyup="bookkeyup()">
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" name="lastName" placeholder="Last name">
+                                <input type="text" class="form-control name_post" name="lastName" placeholder="Last name" onkeyup="bookkeyup()">
                             </div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col">
-                                <input type="text" class="form-control" name="mailAdress" placeholder="Mail adress">
+                                <input type="text" class="form-control email_post" name="mailAdress" placeholder="Mail adress" onkeyup="bookkeyup()">
                             </div>
-
                         </div>
                     </form>
                 </div>
@@ -179,14 +183,13 @@
             </div>
         </div>
     </div>
-    <!-------------FIN POPUP---------------------------->
+    <!-------------FIN POPUP------------------------------------------------>
     <footer>
         <div id="footer">
             <h6>© 2020 MUSICEVENT.COM BY VALENTIN & VIRGILE</h6>
         </div>
     </footer>
 </div>
-
 </body>
       
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
