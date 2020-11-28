@@ -1,10 +1,8 @@
 from flask import Flask, render_template, request
 import manager
 
-
-
-
-
+# TODO : commenter et détailler __name__
+# TODO : renommer variables state, etc...
 
 app = Flask(__name__)
 
@@ -12,20 +10,6 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def accueil():
-
-    #posts = db.posts
-    '''new_posts = [
-        {"author": "Mike",
-                "text": "Another post!",
-                "tags": ["bulk", "insert"]},
-                {"author": "Eliot",
-                "title": "MongoDB is fun",
-                "text": "and pretty easy too!"}
-                ]
-    result = posts.insert_many(new_posts)
-    result.inserted_ids'''
-
-
     query_1_state, concerts = manager.getMainPageConcerts()
     query_2_state, lastResa = manager.getLastReservedConcerts()
     return render_template('index.html',
@@ -34,7 +18,6 @@ def accueil():
                             lastBookedConcerts=lastResa)
 
 
-# /book?idConcert=17&firstName=testfirst&lastName=testlast&email=testemail
 @app.route('/book', methods=['GET'])
 def book():
     idConcert = request.args.get('idConcert')
@@ -52,7 +35,6 @@ def book():
                             lastBookedConcerts=lastResa)
 
 
-# /search?method=city&value=Marseille
 @app.route('/search', methods=['GET'])
 def search():
     searchMethod = request.args.get('method')
@@ -73,13 +55,17 @@ def search():
 
 
 
-@app.route('/mongo', methods=['GET'])
-def mongonewsletter():
-    manager.subscribeToNewsletter("email", 2)
+@app.route('/subscribe', methods=['GET'])
+def subscribeToNewsletter():
+    email = request.args.get('email')
+    offers = request.args.get('offers')
+    state = manager.subscribeToNewsletter(email, offers)
+    query_1_state, concerts = manager.getMainPageConcerts()
+    query_2_state, lastResa = manager.getLastReservedConcerts()
     return render_template('index.html',
-                            queryState = True,
-                            concertsList=[],
-                            lastBookedConcerts=[])
+                            queryState = state and query_1_state and query_2_state,
+                            concertsList=concerts,
+                            lastBookedConcerts=lastResa)
 
 
 
@@ -91,3 +77,4 @@ if __name__ == "__main__":
 # /search?method=city&value=toulou
 # /search?method=date&value=2021-02-15
 # /search?method=artist&value=bat
+#/subscribe?email=testemail&offers=1

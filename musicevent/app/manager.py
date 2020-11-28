@@ -1,8 +1,7 @@
 import psycopg2
 
-# TODO : si saisie contient des quotes (simple ou double) : problème
-# TODO : après appel d'une fonction, réinitialiser l'url dans le navigateur
-# TODO : cursor.close()
+# TODO : commenter et réorganiser imports et initialisation de BDD
+# TODO : inserer dans mongo ssi email pas encore presente?
 
 
 connexion = psycopg2.connect(user="postgres",
@@ -17,9 +16,8 @@ cursor = connexion.cursor()
 import pymongo
 from pymongo import MongoClient
 client = MongoClient(host='mongodb', port=27017,username='mongo',password='mongo')
-
 db = client.musicevent
-
+collection = db.newsletters 
 
 
 
@@ -101,12 +99,9 @@ def getLastReservedConcerts():
 
 
 def subscribeToNewsletter(email, receiveAds):
-    collection = db.newsletters 
-    emp_rec1 = { 
-            "name":"Mr.Eloy", 
-            "eid":24, 
-            "location":"delhi"
-            } 
-
-    rec_id1 = collection.insert_one(emp_rec1) 
-    return False, []
+    data = {"email":email, "receiveAds":receiveAds} 
+    try:
+        state = collection.insert_one(data)
+        return True
+    except:
+        return False
