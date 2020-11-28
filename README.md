@@ -18,3 +18,6 @@ sudo docker system prune -a
 sudo docker exec -it musicevent_mongodb_1 bash
 mongo -u mongo -p mongo
 show dbs
+use dbName
+show collections
+db.collectionName.find()

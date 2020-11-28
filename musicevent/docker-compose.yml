@@ -77,14 +77,28 @@ services:
    ###   - ./mongo-volume:/data/db
    ### ports:
    ###   - "27017:27017"
+   
+   
+  #mongodb:
+   # image: mongo:latest
+  #  environment:
+ #     - MONGO_INITDB_DATABASE=mongo
+  #    - MONGO_INITDB_ROOT_USERNAME=mongo
+  #   - MONGO_INITDB_ROOT_PASSWORD=mongo
+   #   - MONGODB_DATA_DIR=/data/db
+   #   - MONDODB_LOG_DIR=/dev/null
+   
   mongodb:
-    image: mongo:latest
+    image: mongo
     environment:
       - MONGO_INITDB_DATABASE=mongo
       - MONGO_INITDB_ROOT_USERNAME=mongo
       - MONGO_INITDB_ROOT_PASSWORD=mongo
       - MONGODB_DATA_DIR=/data/db
       - MONDODB_LOG_DIR=/dev/null
+    volumes: 
+      - ./init-mongo.js:/docker-entrypoint-initdb.b/init-mongo.js:ro
+      - mongodbdata:/data/db
       
   web:
       build: .
@@ -99,5 +113,7 @@ services:
 volumes:
   #mongodbdata:
   #  driver: local
+  mongodbdata:
+    driver: local
   psqldata:
     driver: local

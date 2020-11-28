@@ -12,6 +12,17 @@ connexion = psycopg2.connect(user="postgres",
                              database="musicevent")
 cursor = connexion.cursor()
 
+
+
+import pymongo
+from pymongo import MongoClient
+client = MongoClient(host='mongodb', port=27017,username='mongo',password='mongo')
+
+db = client.musicevent
+
+
+
+
 selectionQueryBase = "SELECT Concert.id, Band.name, Band.mediaUrl, MusicType.name, TO_CHAR(date :: DATE, 'yyyy-mm-dd') AS concertDate, City.name, Country.name " \
             "FROM Concert " \
             "inner join City on City.id = idCity " \
@@ -89,4 +100,13 @@ def getLastReservedConcerts():
         return False, []
 
 
-#def subscribeToNewsletter(email, receiveAds):
+def subscribeToNewsletter(email, receiveAds):
+    collection = db.newsletters 
+    emp_rec1 = { 
+            "name":"Mr.Eloy", 
+            "eid":24, 
+            "location":"delhi"
+            } 
+
+    rec_id1 = collection.insert_one(emp_rec1) 
+    return False, []

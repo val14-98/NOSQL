@@ -1,23 +1,9 @@
 from flask import Flask, render_template, request
 import manager
 
-#import pymongo
-#from pymongo import MongoClient
 
 
-#client = MongoClient(host=['localhost:27017'],username='mongo',password='mongo') #host='mongodb', port=27017
-'''client = MongoClient()
-db = client.test_database
-collection = db.test_collection
 
-document1 = {
-    "name":"John",
-    "age":24,
-    "location":"New York"
-    }
-
-collection.insert_one(document1)
-'''
 
 
 app = Flask(__name__)
@@ -26,9 +12,6 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def accueil():
-
-
-
 
     #posts = db.posts
     '''new_posts = [
@@ -87,6 +70,16 @@ def search():
                             concertsList=concerts,
                             lastBookedConcerts=lastResa)
 
+
+
+
+@app.route('/mongo', methods=['GET'])
+def mongonewsletter():
+    manager.subscribeToNewsletter("email", 2)
+    return render_template('index.html',
+                            queryState = True,
+                            concertsList=[],
+                            lastBookedConcerts=[])
 
 
 

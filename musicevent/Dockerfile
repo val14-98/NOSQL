@@ -7,6 +7,6 @@ WORKDIR /home/app/
 
 EXPOSE 5000
 
-# RUN python3 -m pip install pymongo ##
+RUN python3 -m pip install pymongo ##
 
 ENTRYPOINT ["python3", "app.py"]
