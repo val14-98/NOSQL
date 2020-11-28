@@ -122,7 +122,7 @@ $(document).ready(function () {
             checked=0;
         }
 
-        document.location.href = "news?email=" + email + "&offer="+checked ;
+        document.location.href = "subscribe?email=" + email + "&offer="+checked ;
     });
 
     //Redirection formulaire book
