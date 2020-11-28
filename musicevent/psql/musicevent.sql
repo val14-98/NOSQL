@@ -5,6 +5,8 @@
 -- DROP DATABASE IF EXISTS musicevent;
 -- CREATE DATABASE musicevent;
 
+-- TODO : Modifier dates dans Reservation
+
 DROP TABLE IF EXISTS MusicType;
 DROP TABLE IF EXISTS Band;
 DROP TABLE IF EXISTS Country;

@@ -14,90 +14,15 @@ services:
       
     expose:
       - 5432
-      
-  #mongodb:
- #   image: mongo:latest
-  #  environment:
- #     - PORT=3000   ##
- #     - DATABASE_USER=pastime   ##
- #     - DATABASE_URL=mongo:27017  ##
- #     - DATABASE_PASS=pastime123  #
- #     - DATABASE_NAME=pastime   ##
- #     - MONGO_INITDB_DATABASE=mongo
- #     - MONGO_INITDB_ROOT_USERNAME=mongo
- #     - MONGO_INITDB_ROOT_PASSWORD=mongo
-  #    - MONGODB_DATA_DIR=/data/db
-  #    - MONDODB_LOG_DIR=/dev/null
-   # ports: ##
- ## #    - "27017:27017"   ##
-  #  volumes:
-  #    - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-   # #volumes:
-   #   - mongodbdata:/data/db ##
-
-
-
-  #mongodb:
-  # image: mongo:latest
-  # restart: always
- #  ports:
-  #   - "27017:27017"
-   #environment:
-   #  - MONGO_INITDB_DATABASE=mongo
-   #  - MONGO_INITDB_ROOT_USERNAME=mongo
-   #  - MONGO_INITDB_ROOT_PASSWORD=mongo
-   #volumes:
-   #  - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-  # environment:
- #    - MONGO_INITDB_ROOT_USERNAME=mongo
-  #   - MONGO_INITDB_ROOT_PASSWORD=mongo
-  #   - MONGO_INITDB_DATABASE=admintestdb
-  # volumes:
-   #  - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-
-
-  #mongodb:
-  #  image: mongo
-  #  restart: always
-  #  environment:
-   #   MONGO_INITDB_ROOT_USERNAME: mongo
-   #   MONGO_INITDB_ROOT_PASSWORD: mongo
-  ###mongodb:
-  ###  image: mongo
-    #container_name: aContainerName   ##
-    # restart: unless-stopped
-  ###  environment:
-   ###   - MONGO_INITDB_DATABASE=dbtest
-   ###   - MONGO_INITDB_ROOT_USERNAME=mongo
-   ###   - MONGO_INITDB_ROOT_PASSWORD=mongo
-      #- MONGODB_DATA_DIR: /data/db
-      #- MONDODB_LOG_DIR: /dev/null
-   ### volumes:
-   ###   - ./init-mongo.js:/docker-entrypoint-initdb.b/init-mongo.js:ro
-   ###   - ./mongo-volume:/data/db
-   ### ports:
-   ###   - "27017:27017"
-   
-   
-  #mongodb:
-   # image: mongo:latest
-  #  environment:
- #     - MONGO_INITDB_DATABASE=mongo
-  #    - MONGO_INITDB_ROOT_USERNAME=mongo
-  #   - MONGO_INITDB_ROOT_PASSWORD=mongo
-   #   - MONGODB_DATA_DIR=/data/db
-   #   - MONDODB_LOG_DIR=/dev/null
    
   mongodb:
     image: mongo
     environment:
-      - MONGO_INITDB_DATABASE=mongo
       - MONGO_INITDB_ROOT_USERNAME=mongo
       - MONGO_INITDB_ROOT_PASSWORD=mongo
       - MONGODB_DATA_DIR=/data/db
       - MONDODB_LOG_DIR=/dev/null
     volumes: 
-      - ./init-mongo.js:/docker-entrypoint-initdb.b/init-mongo.js:ro
       - mongodbdata:/data/db
       
   web:
@@ -111,8 +36,6 @@ services:
         - mongodb
         
 volumes:
-  #mongodbdata:
-  #  driver: local
   mongodbdata:
     driver: local
   psqldata:
