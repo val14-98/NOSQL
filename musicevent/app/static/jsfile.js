@@ -117,11 +117,4 @@ function bookkeyup() {
     }
 }
 
-function redirectIfDatabaseQueryFailed() {
-	// Si une erreur est survenue lors de l'exécution d'une requête en BDD, affiche un message d'erreur
-	// et redirige l'utilisateur vers la page d'accueil
-	{% if queryState != true %}
-		alert("Un problème technique est survenu lors de notre recherche...\nVous allez être redirigé vers la page d'accueil");
-		window.location.href = document.location.origin;
-	{% endif %}
-}
+
