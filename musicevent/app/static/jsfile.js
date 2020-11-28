@@ -7,26 +7,22 @@ $(document).ready(function () {
 
     //detecter url après une reservation et rediriger
     if(document.location.href.includes('/book?')) {
-        document.location.href = document.location.origin;
-        message="book_success";
+        $('#space_alert').html('<div class="alert alert-success collapse alerts" role="alert">\n' +
+            '                Congrats! Your reservation is done !' +
+            '                <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+            '                    <span aria-hidden="true">&times;</span>\n' +
+            '                </button>\n' +
+            '            </div>\n');
+        $(".alert").show('fade');
+        setTimeout(function() {
+
+            document.location.href = document.location.origin;
+
+        }, 5000);
     }
     if(document.location.href.includes('/subscribe?')) {
-        document.location.href = document.location.origin;
-        message="news_success";
-    }
-    //On affiche les messages de succès
-    if(message="book_success"){
-            alert();
-            $('#space_alert').html('<div class="alert alert-success collapse alerts" role="alert">\n' +
-                '                Congrats! Your reservation is done !' +
-                '                <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
-                '                    <span aria-hidden="true">&times;</span>\n' +
-                '                </button>\n' +
-                '            </div>\n');
-            $(".alert").show('fade');
-            message="";
-    }
-    if(message="news_success"){
+
+        $(window).bind('load', function() {
             $('#space_alert').html('<div class="alert alert-success collapse alerts" role="alert">\n' +
                 '                Your newsletter subscription is taken into account!' +
                 '                <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
@@ -34,8 +30,35 @@ $(document).ready(function () {
                 '                </button>\n' +
                 '            </div>\n');
             $(".alert").show('fade');
-            message="";
+            setTimeout(function() {
+
+                document.location.href = document.location.origin;
+
+            }, 5000);
+        });
     }
+    //On affiche les messages de succès
+    $(window).bind('load', function()
+    {
+        if(message==="book_success"){
+            $('#space_alert').html('<div class="alert alert-success collapse alerts" role="alert">\n' +
+                '                Congrats! Your reservation is done !' +
+                '                <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+                '                    <span aria-hidden="true">&times;</span>\n' +
+                '                </button>\n' +
+                '            </div>\n');
+            $(".alert").show('fade');
+        }
+        if(message==="news_success"){
+            $('#space_alert').html('<div class="alert alert-success collapse alerts" role="alert">\n' +
+                '                Your newsletter subscription is taken into account!' +
+                '                <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+                '                    <span aria-hidden="true">&times;</span>\n' +
+                '                </button>\n' +
+                '            </div>\n');
+            $(".alert").show('fade');
+        }
+    });
        
     $('input[type=radio][name=inlineRadioOptions]').change(function () {
         $('#button-addon2').prop('disabled', false);
