@@ -15,8 +15,8 @@ $(document).ready(function () {
         message="news_success";
     }
     //On affiche les messages de succès
-    if(document.location.href == document.location.origin){
-        if(message="book_success"){
+    if(message="book_success"){
+            alert();
             $('#space_alert').html('<div class="alert alert-success collapse alerts" role="alert">\n' +
                 '                Congrats! Your reservation is done !' +
                 '                <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
@@ -25,8 +25,8 @@ $(document).ready(function () {
                 '            </div>\n');
             $(".alert").show('fade');
             message="";
-        }
-        if(message="news_success"){
+    }
+    if(message="news_success"){
             $('#space_alert').html('<div class="alert alert-success collapse alerts" role="alert">\n' +
                 '                Your newsletter subscription is taken into account!' +
                 '                <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
@@ -35,8 +35,6 @@ $(document).ready(function () {
                 '            </div>\n');
             $(".alert").show('fade');
             message="";
-        }
-
     }
        
     $('input[type=radio][name=inlineRadioOptions]').change(function () {
