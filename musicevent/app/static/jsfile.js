@@ -4,6 +4,13 @@ let method = "artist";
 let idConcert;
 $(document).ready(function () {
 
+     //detecter url après une reservation et rediriger
+     if(document.location.href.includes('book?')) {
+     alert("book detect");
+        document.location.href = document.location.origin;
+        
+    }
+       
     $('input[type=radio][name=inlineRadioOptions]').change(function () {
         $('#button-addon2').prop('disabled', false);
         if ($('#inlineRadio1').is(':checked')) {
@@ -108,4 +115,13 @@ function bookkeyup() {
     } else {
         $('#bookSubmit').prop('disabled', true);
     }
+}
+
+function redirectIfDatabaseQueryFailed() {
+	// Si une erreur est survenue lors de l'exécution d'une requête en BDD, affiche un message d'erreur
+	// et redirige l'utilisateur vers la page d'accueil
+	{% if queryState != true %}
+		alert("Un problème technique est survenu lors de notre recherche...\nVous allez être redirigé vers la page d'accueil");
+		window.location.href = document.location.origin;
+	{% endif %}
 }
