@@ -5,7 +5,6 @@ import manager
 
 
 
-
 app = Flask(__name__)
 
 

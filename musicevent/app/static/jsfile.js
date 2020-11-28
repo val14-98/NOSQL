@@ -2,13 +2,41 @@
 //MODIFICATION DES NOM DES INPUT ET BOUTON DANS INDEX
 let method = "artist";
 let idConcert;
+let message="";
 $(document).ready(function () {
 
-     //detecter url après une reservation et rediriger
-     if(document.location.href.includes('book?')) {
-     alert("book detect");
+    //detecter url après une reservation et rediriger
+    if(document.location.href.includes('/book?')) {
         document.location.href = document.location.origin;
-        
+        message="book_success";
+    }
+    if(document.location.href.includes('/subscribe?')) {
+        document.location.href = document.location.origin;
+        message="news_success";
+    }
+    //On affiche les messages de succès
+    if(document.location.href == document.location.origin){
+        if(message="book_success"){
+            $('#space_alert').html('<div class="alert alert-success collapse alerts" role="alert">\n' +
+                '                Congrats! Your reservation is done !' +
+                '                <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+                '                    <span aria-hidden="true">&times;</span>\n' +
+                '                </button>\n' +
+                '            </div>\n');
+            $(".alert").show('fade');
+            message="";
+        }
+        if(message="news_success"){
+            $('#space_alert').html('<div class="alert alert-success collapse alerts" role="alert">\n' +
+                '                Your newsletter subscription is taken into account!' +
+                '                <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+                '                    <span aria-hidden="true">&times;</span>\n' +
+                '                </button>\n' +
+                '            </div>\n');
+            $(".alert").show('fade');
+            message="";
+        }
+
     }
        
     $('input[type=radio][name=inlineRadioOptions]').change(function () {
