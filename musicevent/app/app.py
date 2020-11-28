@@ -2,22 +2,47 @@ from flask import Flask, render_template, request
 import manager
 
 #import pymongo
+#from pymongo import MongoClient
 
-#myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-#mydb = myclient["mydatabase"]
-#mycol = mydb["customers"]
 
-#mydict = { "name": "John", "address": "Highway 37" }
+#client = MongoClient(host=['localhost:27017'],username='mongo',password='mongo') #host='mongodb', port=27017
+'''client = MongoClient()
+db = client.test_database
+collection = db.test_collection
 
-#x = mycol.insert_one(mydict)
+document1 = {
+    "name":"John",
+    "age":24,
+    "location":"New York"
+    }
 
-# import mongodb
+collection.insert_one(document1)
+'''
+
+
 app = Flask(__name__)
 
 
 
 @app.route('/', methods=['GET'])
 def accueil():
+
+
+
+
+    #posts = db.posts
+    '''new_posts = [
+        {"author": "Mike",
+                "text": "Another post!",
+                "tags": ["bulk", "insert"]},
+                {"author": "Eliot",
+                "title": "MongoDB is fun",
+                "text": "and pretty easy too!"}
+                ]
+    result = posts.insert_many(new_posts)
+    result.inserted_ids'''
+
+
     query_1_state, concerts = manager.getMainPageConcerts()
     query_2_state, lastResa = manager.getLastReservedConcerts()
     return render_template('index.html',

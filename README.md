@@ -11,3 +11,10 @@ Lancer le docker si problème lors de la création de la BDD :
 Si erreur liée à un orphelin, répéter les étapes précédentes 2 à 4 puis sudo docker-compose up --remove-orphans 
 
 sudo docker system prune -a
+
+
+
+
+sudo docker exec -it musicevent_mongodb_1 bash
+mongo -u mongo -p mongo
+show dbs

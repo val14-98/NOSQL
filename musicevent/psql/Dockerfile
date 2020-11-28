@@ -11,7 +11,8 @@ RUN apk add --no-cache postgresql-dev gcc python3 python3-dev musl-dev && \
     pip3 install --upgrade pip setuptools && \
     rm -r /root/.cache && \
     pip3 install -r requirements.txt
-    
+
+
 FROM postgres
 EXPOSE 5432
 ADD musicevent.sql /docker-entrypoint-initdb.d/
