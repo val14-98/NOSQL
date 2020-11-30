@@ -2,9 +2,6 @@ import psycopg2
 import pymongo
 from pymongo import MongoClient
 
-# TODO : inserer dans mongo ssi email pas encore presente?
-
-
 #############################################
 ### Initialisation des connexions aux BDD ###
 #############################################

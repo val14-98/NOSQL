@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request
 import manager
 
-# TODO : commenter et détailler __name__
-
 app = Flask(__name__)
 
 
