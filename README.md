@@ -39,7 +39,7 @@ MongoDB : <br>sudo docker exec -it musicevent_mongodb_1 bash
           <br>show dbs
           <br>use dbName
           <br>show collections
-          <br>db.collectionName.find()
+          <br>db.newsletters.find()
 
 <h2>CONTENU DES DOSSIERS</h2>
 
