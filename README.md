@@ -43,7 +43,7 @@ MongoDB : sudo docker exec -it musicevent_mongodb_1 bash
 
 <h2>CONTENU DES DOSSIERS</h2>
 
-Dossier /psql : Contient le dockerfile pour d'installation des librairies depuis "requirements.txt" et également le contenu de la db "musicevent.sql"
+Dossier /psql : Contient le dockerfile pour l'installation des librairies depuis "requirements.txt" et également le contenu de la db "musicevent.sql"
 
 Dossier /app : Contient app.py qui est le main du projet qui intéragit avec la vue et manager.py qui dialogue avec les bases de données postgresql et mongoDB
 
