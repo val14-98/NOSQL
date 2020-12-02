@@ -55,7 +55,7 @@ INSERT INTO Band (idMusicType, name, mediaUrl) VALUES (3,'6ix9ine','https://i.pi
 
 --Electro
 INSERT INTO Band (idMusicType, name, mediaUrl) VALUES (4,'Daft Punk','https://cdn-s-www.estrepublicain.fr/images/69254D95-AD72-4908-9950-BFCF4041D356/NW_raw/capture-d-ecran-de-la-page-d-accueil-www-daftpunk-com-1361951190.jpg');
-INSERT INTO Band (idMusicType, name, mediaUrl) VALUES (4,'Deadmau5','https://www.thefamouspeople.com/profiles/images/deadmau5-2.jpg');
+INSERT INTO Band (idMusicType, name, mediaUrl) VALUES (4,'Deadmau5','https://www.clubbingtv.com/wp-content/uploads/2016/02/deadmau5-review-5a26b22e-ee5f-4a06-9c4e-19697caf3159.jpg');
 INSERT INTO Band (idMusicType, name, mediaUrl) VALUES (4,'Tiësto','https://m.media-amazon.com/images/I/41iYHdodZOL._SL1000_.jpg');
 INSERT INTO Band (idMusicType, name, mediaUrl) VALUES (4,'W&W','https://images.squarespace-cdn.com/content/v1/52caf22ee4b05977ab043ee9/1464821925219-7DBGX5TINN3FXJL1KUWL/ke17ZwdGBToddI8pDm48kNZu818u8d5rYnrob_pZCjJ7gQa3H78H3Y0txjaiv_0foACs49-HBkG_F4C3fTziO48P4ND6591eyixB1seuwXaplUIB77utV0SH3QLyqo6UOqpeNLcJ80NK65_fV7S1UWwHt-UECQkRgRXE78GKwNY_bpKTyGh4ZrtKcaQ0Hi6GTaIpBKTr91CW8Hu-LnUQUQ/Screen+Shot+2015-06-15+at+11.40.28+AM.png');
 INSERT INTO Band (idMusicType, name, mediaUrl) VALUES (4,'KSHMR','https://yt3.ggpht.com/ytc/AAUvwnhybXdFqOz-Gd9FLc8uYq4ln0XFqq_690tupk0flw=s900-c-k-c0x00ffffff-no-rj');
