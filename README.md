@@ -29,12 +29,12 @@ Le serveur tourne sur le port 5000.
 
 Pour visualiser la persistance des données vous pouvez accèder aux bases postgresql et mongoDB :
 
-Postgresql : sudo docker exec -it musicevent_psql_1 bash
+Postgresql : <br>sudo docker exec -it musicevent_psql_1 bash
              <br>psql -U postgres
              <br>\c musicevent
              <br>\dt
              
-MongoDB : sudo docker exec -it musicevent_mongodb_1 bash
+MongoDB : <br>sudo docker exec -it musicevent_mongodb_1 bash
           <br>mongo -u mongo -p mongo
           <br>show dbs
           <br>use dbName
