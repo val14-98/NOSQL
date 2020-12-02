@@ -121,9 +121,15 @@ def book(idConcert, prenom, nom, email):
 #         array2D : Array dont chaque ligne représente un concert (cf parseSelectionResults)
 #                   = [] si boolean = False
 def getLastReservedConcerts():
-    subsubquery = "SELECT idConcert, max(date) AS maxReservationDate FROM Reservation GROUP BY idConcert ORDER BY maxReservationDate DESC LIMIT 10"
-    subquery = "AND Concert.id IN(SELECT idConcert FROM ("+subsubquery+") AS concertSelection"
-    query = selectionQueryBase + subquery +")"
+    query  = "SELECT Concert.id, Band.name, Band.mediaUrl, MusicType.name, TO_CHAR(date :: DATE, 'yyyy-mm-dd') AS concertDate, City.name, Country.name "
+    query += "FROM(SELECT idConcert, max(date) AS maxReservationDate FROM Reservation GROUP BY idConcert ORDER BY maxReservationDate DESC LIMIT 10) as subquery "
+    query += "inner join concert on concert.id = subquery.idConcert "
+    query += "inner join City on City.id = concert.idCity "
+    query += "inner join Country on Country.id = city.idCountry "
+    query += "inner join Band on Band.id = concert.idBand "
+    query += "inner join MusicType on MusicType.id = band.idMusicType where date >= NOW() "
+    query += "ORDER BY maxReservationDate DESC LIMIT 10"
+    
     try :
         psqlCursor.execute(query)
         return True, parseSelectionResults()
