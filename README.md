@@ -3,7 +3,7 @@
 <h2>INTRODUCTION</h2>
 
 Notre projet est un site de recherche et de réservation de concert.
-Il est possible de réaliser des recherches, par artiste, par ville ou pas date de concert.
+Il est possible de réaliser des recherches, par artiste, par ville ou par date de concert.
 
 Ce projet est composé de 3 dockers :
 
